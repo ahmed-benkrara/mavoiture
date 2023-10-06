@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('modele_phase', function (Blueprint $table) {
+        Schema::create('motorisation', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->unsignedInteger('modele_id');
-            $table->unsignedInteger('phase_id');
             $table->foreign('modele_id')->references('id')->on('modele')->onDelete('cascade');
-            $table->foreign('phase_id')->references('id')->on('phase')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modele_phase');
+        Schema::dropIfExists('motorisation');
     }
 };

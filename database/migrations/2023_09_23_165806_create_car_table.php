@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('car', function (Blueprint $table) {
             $table->id();
-            $table->string('image_path');
-            $table->string('motorization');
-            $table->unsignedInteger('modele_id');
-            $table->unsignedInteger('phase_id');
+            $table->string('image');
+            $table->unsignedInteger('generation_id');
+            $table->unsignedInteger('motorisation_id');
             $table->unsignedInteger('pricerange_id');
-            $table->foreign('modele_id')->references('id')->on('modele')->onDelete('cascade');
-            $table->foreign('phase_id')->references('id')->on('phase')->onDelete('cascade');
+            $table->foreign('generation_id')->references('id')->on('generation')->onDelete('cascade');
+            $table->foreign('motorisation_id')->references('id')->on('motorisation')->onDelete('cascade');
             $table->foreign('pricerange_id')->references('id')->on('pricerange')->onDelete('cascade');
             $table->timestamps();
         });

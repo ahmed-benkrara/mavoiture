@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('phase', function (Blueprint $table) {
+        Schema::create('generation', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->date('start');
-            $table->date('end');
+            $table->string('name');
+            $table->unsignedInteger('modele_id');
+            $table->foreign('modele_id')->references('id')->on('modele')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phase');
+        Schema::dropIfExists('generation');
     }
 };
