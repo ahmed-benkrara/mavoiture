@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Modele;
 
-class Phase extends Model
+class Generation extends Model
 {
     use HasFactory;
-    protected $table = 'phase';
+    protected $table = 'generation';
     protected $primarykey = 'id';
     protected $fillable = [
-        'name', 'start', 'end'	
+        'name', 'modele_id'
     ];
 
-    public function modeles(){
-        return $this->belongsToMany(Modele::class, 'modele_phase');
+    public function modele(){
+        return $this->belongsTo(Modele::class);
     }
 }

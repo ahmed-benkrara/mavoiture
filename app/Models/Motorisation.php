@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Mark;
+use App\Models\Modele;
 
-class Modele extends Model
+class Motorisation extends Model
 {
     use HasFactory;
-    protected $table = 'modele';
+    protected $table = 'motorisation';
     protected $primarykey = 'id';
     protected $fillable = [
-        'name', 'mark_id'
+        'name', 'modele_id'
     ];
 
-    public function mark(){
-        return $this->belongsTo(Mark::class);
+    public function modele(){
+        return $this->belongsTo(Modele::class);
     }
 }
