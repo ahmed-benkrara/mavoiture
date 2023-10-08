@@ -19,9 +19,7 @@
         <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
           <h6>Liste des modèles</h6>
         </div>
-        @if(Session::has('success'))
-           <p class="text-sm w-full px-4 py-3 mt-4 mx-4" style="background:#cce5ff; border-radius:6px; color:#004085; border:1px solid #b8daff;">{{ Session::get('success') }}</p>
-        @endif
+        <input type="hidden" id="success-message" value="{{ Session::has('success') ? Session::get('success') : '' }}">
         <div class="flex-auto px-0 pt-0 pb-2">
           <div class="p-0 overflow-x-auto">
             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
@@ -78,4 +76,12 @@
       </div>
     </div>
 </div>
+
+<script>
+  var successMessage = document.getElementById('success-message').value;
+
+  if (successMessage !== '') {
+      alert(successMessage);
+  }
+</script>
 @endsection
