@@ -17,6 +17,6 @@ class PriceRange extends Model
     ];
 
     public function cars(){
-        return $this->belongTo(Car::class);
+        return $this->belongsToMany(Car::class, 'car_price', 'car_id', 'pricerange_id');
     }
 }

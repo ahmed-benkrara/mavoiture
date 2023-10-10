@@ -112,7 +112,7 @@ class GenerationController extends Controller
                 'modele_id' => $request->modele_id
             ]);
 
-            return back()->with('success', 'Modèle mis à jour avec succès !');
+            return back()->with('success', 'Génération mise à jour avec succès !');
         }catch(ModelNotFoundException $e){
             abort(404);
         }

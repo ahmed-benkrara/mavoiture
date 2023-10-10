@@ -14,12 +14,11 @@ class ContactController extends Controller
     }
 
     public function sendMail(Request $request){
-        // try{
+        try{
             Mail::to("ahmed.benkrara12@gmail.com")->send(new ContactMail($request->fname, $request->lname, $request->email, $request->sujet, $request->message));
             return back()->with('success', 'E-mail envoyé avec succès!');
-        // }catch(\Exception $e){
-        //     dd('error');
-        //     return back()->with('error', 'Échec de l\'envoi de l\'e-mail. Veuillez réessayer plus tard.');
-        // }
+        }catch(\Exception $e){
+            return back()->with('error', 'Échec de l\'envoi de l\'e-mail. Veuillez réessayer plus tard.');
+        }
     }
 }

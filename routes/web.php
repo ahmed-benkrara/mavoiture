@@ -11,6 +11,8 @@ use App\Http\Controllers\ModeleController;
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\MotorisationController;
 use App\Http\Controllers\PriceRangeController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\CustomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +73,17 @@ Route::post('/pricerange/create', [PriceRangeController::class, 'store']);
 Route::get('/pricerange/edit/{id}', [PriceRangeController::class, 'edit']);
 Route::put('/pricerange/edit/{id}', [PriceRangeController::class, 'update'])->name('pricerange.update');
 Route::delete('/pricerange/delete/{id}', [PriceRangeController::class, 'destroy'])->name('pricerange.delete');
+//Cars
+Route::get('/cars', [CarController::class, 'index']);
+Route::get('/cars/create', [CarController::class, 'create']);
+Route::post('/cars/create', [CarController::class, 'store']);
+Route::get('/cars/edit/{id}', [CarController::class, 'edit']);
+Route::put('/cars/edit/{id}', [CarController::class, 'update'])->name('cars.update');
+Route::delete('/cars/delete/{id}', [CarController::class, 'destroy'])->name('cars.delete');
+//custom
+Route::get('/custom', [CustomController::class, 'index']);
+Route::post('/custom', [CustomController::class, 'update'])->name('custom.update');
+Route::post('/social', [CustomController::class, 'social'])->name('custom.social');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

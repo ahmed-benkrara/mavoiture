@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('car', function (Blueprint $table) {
+        Schema::create('car_price', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->unsignedInteger('generation_id')->nullable();
-            $table->unsignedInteger('motorisation_id');
-            $table->foreign('generation_id')->references('id')->on('generation')->onDelete('cascade');
-            $table->foreign('motorisation_id')->references('id')->on('motorisation')->onDelete('cascade');
+            $table->unsignedInteger('car_id');
+            $table->unsignedInteger('pricerange_id');
+            $table->foreign('car_id')->references('id')->on('car')->onDelete('cascade');
+            $table->foreign('pricerange_id')->references('id')->on('pricerange')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car');
+        Schema::dropIfExists('car_price');
     }
 };
