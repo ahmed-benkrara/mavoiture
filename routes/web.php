@@ -13,6 +13,7 @@ use App\Http\Controllers\MotorisationController;
 use App\Http\Controllers\PriceRangeController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomController;
+use App\Http\Controllers\SearchBudgetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'sendMail']);
 Route::get('/about', [AboutController::class, 'index']);
 
-Route::get('/test', function(){
-    return view('client.search');
-});
+Route::get('/search', [SearchBudgetController::class, 'index']);
 //clients
 Route::get('/clients', [ClientController::class, 'index']);
 //brands
