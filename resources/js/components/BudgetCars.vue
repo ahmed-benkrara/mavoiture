@@ -15,30 +15,30 @@
             <div class="test rounded-md sm:w-[90%] md:w-[80%] left-0 right-0 mx-auto absolute sm:hidden md:block bottom-[-40px] shadow-2xl">
                 <div class="bg-white px-4 py-3 rounded-md shadow-lg">
                     <div class="sm:block md:flex w-full h-fit">
-                        <input class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
-                        <select class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
-                            <option selected disabled>Marque</option>
+                        <input ref="budget" class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
+                        <select ref="marque" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
+                            <option selected disabled value="">Marque</option>
                             <option value="all">Tout</option>
-                            <option v-for="item in brands" value="{{ item.id }}">{{ item.name }}</option>
+                            <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
                         </select>
-                        <button class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
-                        <button class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
+                        <button @click="search()" class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
+                        <button @click="search()" class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="h-fit sm:py-[50px] md:py-[100px] w-[90%] mx-auto">
-            <div class="test rounded-md sm:w-[95%] md:w-[80%] mx-auto sm:block md:hidden shadow-2xl mb-[40px]">
+            <div id="second" class="test rounded-md sm:w-[95%] md:w-[80%] mx-auto sm:block md:hidden shadow-2xl mb-[40px]">
                 <div class="bg-white px-4 py-3 rounded-md shadow-lg">
                     <div class="sm:block md:flex w-full h-fit">
-                        <input class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
-                        <select class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
-                            <option selected disabled>Marque</option>
+                        <input ref="budget1" class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
+                        <select ref="marque1" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
+                            <option selected disabled value="">Marque</option>
                             <option value="all">Tout</option>
-                            <option v-for="item in brands" value="{{ item.id }}">{{ item.name }}</option>
+                            <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
                         </select>
-                        <button class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
-                        <button class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
+                        <button @click="search()" class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
+                        <button @click="search()" class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
                     </div>
                 </div>
             </div>
@@ -48,14 +48,15 @@
                     <p class="font-poppins font-[400] text-[13px] text-[#5f5f5f]">Explorez les voitures !</p>
                 </div>
                 <div>
-                    <select class="select select-bordered w-full max-w-xs">
-                        <option disabled selected>Gammes de prix</option>
-                        <option v-for="item in prices" value="{{ item.id }}">{{ item.min }} - {{ item.max }} Dh</option>
+                    <select ref="prix" class="select select-bordered w-full max-w-xs" @change="searchRange()">
+                        <option disabled selected value="">Gammes de prix</option>
+                        <option value="all">Tous les prix</option>
+                        <option v-for="item in prices" :value="item.id">{{ item.min }} - {{ item.max }} Dh</option>
                     </select>
                 </div>
             </div>
             <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mt-6">
-                <CarCard v-for="item in cars" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" price="1M - 2M"/>
+                <CarCard v-for="item in display" :image="item.image" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
             </div>
         </div>
     </div>
@@ -71,7 +72,12 @@ export default{
         return{
             brands: [],
             cars: [],
-            prices: []
+            prices: [],
+            display: [],
+            budget: '',
+            marque: '',
+            price: 0,
+            isform2 : false
         }
     },
     methods:{
@@ -82,11 +88,93 @@ export default{
         async loadCars(){
             let cars = await axios.get('/api/getCars')
             this.cars = cars.data.data
+            this.display = this.cars
         },
         async loadPrices(){
             let prices = await axios.get('/api/getprices')
             this.prices = prices.data
-        }
+        },
+        getPrice(car){
+            if(car.priceranges != null){
+                let priceranges = car.priceranges;
+                if(priceranges.length > 0){
+                    let min = priceranges[0].min
+                    let max = priceranges[0].max
+                    let mint = priceranges[0].name.split('-')[0]
+                    let maxt = priceranges[0].name.split('-')[1]
+
+                    priceranges.forEach((item) => {
+                        if(item.min < min){
+                            min = item.min
+                            mint = item.name.split('-')[0]
+                        }
+
+                        if(item.max > max){
+                            max = item.max
+                            maxt = item.name.split('-')[1]
+                        }
+                    })
+                    return {
+                        min,max,mint,maxt
+                    }
+                }else{
+                    return null
+                }
+            }else{
+                return null
+            }
+        },
+        search(){
+            let budget = this.isForm2Hidden ? this.$refs.budget.value : this.$refs.budget1.value
+            let marque = this.isForm2Hidden ? this.$refs.marque.value : this.$refs.marque1.value
+            let prix = this.$refs.prix
+            if(budget != ''){
+                prix.value = 'all'
+                this.display = this.cars.filter((item) => (this.getPrice(item).min <= parseFloat(budget) && this.getPrice(item).max >= parseFloat(budget)))
+                if(marque != ''){
+                    if(marque != 'all'){
+                        this.display = this.display.filter((item) => item.modele.brand.id == marque)
+                    }
+                }
+            }else{
+                if(marque != ''){
+                    if(marque != 'all'){
+                        this.display = this.cars.filter((item) => item.modele.brand.id == marque)
+                        if(prix.value != ''){
+                            if(prix.value != 'all'){
+                                this.display = this.display.filter((item) => item.priceranges.some(x => x.id == prix.value))
+                            }
+                        }
+                    }else{
+                        this.display = this.cars
+                        if(prix.value != ''){
+                            if(prix.value != 'all'){
+                                this.display = this.display.filter((item) => item.priceranges.some(x => x.id == prix.value))
+                            }
+                        }
+                    }
+                }else{
+                    this.display = this.cars
+                }
+            }
+        },
+        searchRange(){
+            let budget = this.isForm2Hidden ? this.$refs.budget : this.$refs.budget1
+            let prix = this.$refs.prix.value
+            budget.value = ''
+            this.search()
+            if(prix != ''){
+                if(prix != 'all'){
+                    this.display = this.display.filter((item) => item.priceranges.some(x => x.id == prix))
+                }
+            }
+        },
+    },
+    computed:{
+        isForm2Hidden(){
+            let second = document.getElementById('second')
+            return window.getComputedStyle(second).display == 'none'
+        },
     },
     async mounted(){
         await this.loadBrands()
