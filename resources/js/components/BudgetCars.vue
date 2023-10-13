@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="h-fit sm:py-[50px] md:py-[100px] w-[90%] mx-auto">
+        <div class="h-fit sm:pt-[50px] md:pt-[100px] w-[90%] mx-auto">
             <div id="second" class="test rounded-md sm:w-[95%] md:w-[80%] mx-auto sm:block md:hidden shadow-2xl mb-[40px]">
                 <div class="bg-white px-4 py-3 rounded-md shadow-lg">
                     <div class="sm:block md:flex w-full h-fit">
@@ -56,7 +56,11 @@
                 </div>
             </div>
             <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mt-6">
-                <CarCard v-for="item in display" :image="item.image" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
+                <CarCard v-for="item in paginatedDisplay" :image="item.image" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
+            </div>
+            <div class="mt-[60px] mb-[40px]">
+                <button class="px-4 py-2 mr-2 rounded-md text-[#1d6363] bg-[#f0f8ef] font-[500] font-poppins text-[12px] border-[1px]" @click="previousPage" :disabled="currentPage === 1">Précédent</button>
+                <button class="px-4 py-2 rounded-md text-[#1d6363] bg-[#f0f8ef] font-[500] font-poppins text-[12px] border-[1px]" @click="nextPage" :disabled="currentPage * pageSize >= display.length">suivant</button>
             </div>
         </div>
     </div>
@@ -77,7 +81,9 @@ export default{
             budget: '',
             marque: '',
             price: 0,
-            isform2 : false
+            isform2 : false,
+            currentPage: 1,
+            pageSize: 20,
         }
     },
     methods:{
@@ -125,6 +131,7 @@ export default{
             }
         },
         search(){
+            this.currentPage = 1
             let budget = this.isForm2Hidden ? this.$refs.budget.value : this.$refs.budget1.value
             let marque = this.isForm2Hidden ? this.$refs.marque.value : this.$refs.marque1.value
             let prix = this.$refs.prix
@@ -169,11 +176,27 @@ export default{
                 }
             }
         },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--
+            }
+        },
+        nextPage() {
+            const maxPage = Math.ceil(this.display.length / this.pageSize)
+            if (this.currentPage < maxPage) {
+                this.currentPage++
+            }
+        },
     },
     computed:{
         isForm2Hidden(){
             let second = document.getElementById('second')
             return window.getComputedStyle(second).display == 'none'
+        },
+        paginatedDisplay() {
+            const start = (this.currentPage - 1) * this.pageSize
+            const end = start + this.pageSize
+            return this.display.slice(start, end)
         },
     },
     async mounted(){
