@@ -11,7 +11,9 @@
         <div class="w-full">
             <h1 class="font-poppins font-[600] sm:text-[20px] md:text-[25px]">Nous adorons vous lire,</h1>
             <h1 class="font-poppins font-[600] sm:text-[20px] md:text-[25px]">Contactez-nous 👋</h1>
-    
+            @if(Session::has('success'))
+                <p class="text-sm w-full px-4 py-3 mt-4" style="background:#cce5ff; color:#004085; border:1px solid #b8daff;">{{ Session::get('success') }}</p>
+            @endif
             <form action="/contact" method="post" class="mt-[30px]">
                 @csrf
                 <div class="flex gap-x-[20px]">

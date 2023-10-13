@@ -7,10 +7,10 @@
         </div>
         <div>
             <div class="grid grid-cols-2 gap-y-[25px]">
-                <a href="#" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">Trouver Auto</a>
+                <a href="{{ url('/search') }}" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">Trouver Auto</a>
                 <a href="#" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">Diagnostique</a>
-                <a href="#" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">À Propos</a>
-                <a href="#" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">Contact</a>
+                <a href="{{ url('/about') }}" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">À Propos</a>
+                <a href="{{ url('/contact') }}" class="cursor-pointer z-[1] block opacity-90 font-poppins font-[300] text-[16px]">Contact</a>
             </div>
         </div>
         <div class="md:col-span-2 lg:col-span-1">

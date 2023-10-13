@@ -3,13 +3,13 @@
     <div class="w-full justify-between items-center text-[16px] sm:hidden lg:flex">
         <ul class="text-[#1e1e2f] flex">
             <li><a href="{{ url('/') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Accueil</a></li>
-            <li><a href="#" class="listhover cursor-pointer block mr-[40px] opacity-90">Trouver Auto</a></li>
+            <li><a href="{{ url('/search') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Trouver Auto</a></li>
             <li><a href="#" class="listhover cursor-pointer block mr-[40px] opacity-90">Diagnostique</a></li>
             <li><a href="{{ url('/about') }}" class="listhover cursor-pointer block opacity-90">À Propos</a></li>
         </ul>
         <div class="flex items-center ml-[40px]">
             <a href="{{ url('/contact') }}" class="listhover cursor-pointer opacity-90 block mr-[25px]">Contact</a>
-            <a href="#" class="btnhover cursor-pointer opacity-90 block bg-[#1e1e2f] text-white px-6 py-2 rounded-[20px]">Se Connecter</a>
+            <a href="{{ url('/login') }}" class="btnhover cursor-pointer opacity-90 block bg-[#1e1e2f] text-white px-6 py-2 rounded-[20px]">Se Connecter</a>
         </div>
     </div>
     <!-- menu button (open/close) -->
@@ -24,13 +24,13 @@
         <div class="w-full h-full justify-between text-[16px] flex flex-col ">
             <ul class="text-black">
                 <a href="{{ url('/') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Accueil</a>
-                <a href="#" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Trouver Auto</a>
+                <a href="{{ url('/search') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Trouver Auto</a>
                 <a href="#" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Diagnostique</a>
                 <a href="{{ url('/about') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px]">À Propos</a>
             </ul>
             <div class="flex w-full sm:text-[14px] md:text-[16px] border-t-[1px] pt-[20px] font-poppins font-[300]">
                 <a href="{{ url('/contact') }}" class="mr-4 cursor-pointer opacity-90 block bg-white border-gray-200 border-[1px] text-[#1e1e2f] px-6 py-2 rounded-[20px] w-fit">Contact</a>
-                <a href="#" class="cursor-pointer opacity-90 block bg-[#1e1e2f] text-white px-6 py-2 rounded-[20px] w-fit">Se Connecter</a>
+                <a href="{{ url('/login') }}" class="cursor-pointer opacity-90 block bg-[#1e1e2f] text-white px-6 py-2 rounded-[20px] w-fit">Se Connecter</a>
             </div>
         </div>
     </div>
