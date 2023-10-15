@@ -25,7 +25,7 @@
         <h1 class="text-white font-varelarounded px-2">Sorry, but your screen is too short to be supported !</h1>
     </div>
     <footer>
-        @include('mycomponents.footer', ['data' => 'ahmed'])
+        @include('mycomponents.footer', ['data' => $footerData])
     </footer>
 </body>
 </html>

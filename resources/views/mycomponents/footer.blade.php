@@ -26,16 +26,16 @@
     <hr class="mt-[70px] mb-[30px]">
     <div class="sm:flex md:hidden gap-x-4 w-fit mx-auto mb-4">
         <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-            <i class="fa-brands fa-facebook-f text-[18px]"></i>
+            <a target="_blink" href="{{ $footerData['facebook'] }}"><i class="fa-brands fa-facebook-f text-[18px]"></i></a>
         </div>
         <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-            <i class="fa-brands fa-instagram text-[18px]"></i>
+            <a target="_blink" href="{{ $footerData['instagram'] }}"><i class="fa-brands fa-instagram text-[18px]"></i></a>
         </div>
         <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-            <i class="fa-brands fa-linkedin-in text-[18px]"></i>
+            <a target="_blink" href="{{ $footerData['linkedin'] }}"><i class="fa-brands fa-linkedin-in text-[18px]"></i></a>
         </div>
         <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-            <i class="fa-brands fa-whatsapp text-[18px]"></i>
+            <a target="_blink" href="{{ $footerData['whatsapp'] }}"><i class="fa-brands fa-whatsapp text-[18px]"></i></a>
         </div>
     </div>
     <div class="flex justify-between">
@@ -45,16 +45,16 @@
         </div>
         <div class="sm:hidden md:grid grid-cols-4 gap-x-4">
             <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-                <i class="fa-brands fa-facebook-f text-[18px]"></i>
+                <a target="_blink" href="{{ $footerData['facebook'] }}"><i class="fa-brands fa-facebook-f text-[18px]"></i></a>
             </div>
             <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-                <i class="fa-brands fa-instagram text-[18px]"></i>
+                <a target="_blink" href="{{ $footerData['instagram'] }}"><i class="fa-brands fa-instagram text-[18px]"></i></a>
             </div>
             <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-                <i class="fa-brands fa-linkedin-in text-[18px]"></i>
+                <a target="_blink" href="{{ $footerData['linkedin'] }}"><i class="fa-brands fa-linkedin-in text-[18px]"></i></a>
             </div>
             <div class="social w-[40px] h-[40px] text-black rounded-full border-[1px] cursor-pointer flex items-center justify-center">
-                <i class="fa-brands fa-whatsapp text-[18px]"></i>
+                <a target="_blink" href="{{ $footerData['whatsapp'] }}"><i class="fa-brands fa-whatsapp text-[18px]"></i></a>
             </div>
         </div>
     </div>
