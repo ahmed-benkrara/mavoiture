@@ -11,7 +11,7 @@ use App\Models\Problem;
 class Request extends Model
 {
     use HasFactory;
-    protected $table = 'solution';
+    protected $table = 'request';
     protected $primarykey = 'id';
     protected $fillable = [
         'phone', 'car_id', 'problem_id'

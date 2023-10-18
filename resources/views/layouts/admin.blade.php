@@ -85,8 +85,6 @@
       
             <div class="w-full px-6 py-6 mx-auto min-h-screen">
               @yield('body')
-
-
               <footer class="pt-4">
                 <div class="w-full px-6 mx-auto">
                   <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
@@ -108,4 +106,5 @@
     <script src="{{url('/assets/js/plugins/perfect-scrollbar.min.js')}}" async></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{url('/assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5')}}" async></script>
+    @yield('scripts')
 </html>

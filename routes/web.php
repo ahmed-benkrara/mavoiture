@@ -15,6 +15,10 @@ use App\Http\Controllers\PriceRangeController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\SearchBudgetController;
+use App\Http\Controllers\ProblemTypeController;
+use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +39,9 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'sendMail']);
 Route::get('/about', [AboutController::class, 'index']);
 Route::get('/search', [SearchBudgetController::class, 'index']);
+Route::get('/diagnostics', function(){
+    return view('client.diagnostic');
+});
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -86,6 +93,29 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/custom', [CustomController::class, 'index']);
     Route::post('/custom', [CustomController::class, 'update'])->name('custom.update');
     Route::post('/social', [CustomController::class, 'social'])->name('custom.social');
+    //Problem type
+    Route::get('/types', [ProblemTypeController::class, 'index']);
+    Route::get('/types/create', [ProblemTypeController::class, 'create']);
+    Route::post('/types/create', [ProblemTypeController::class, 'store']);
+    Route::get('/types/edit/{id}', [ProblemTypeController::class, 'edit']);
+    Route::put('/types/edit/{id}', [ProblemTypeController::class, 'update'])->name('types.update');
+    Route::delete('/types/delete/{id}', [ProblemTypeController::class, 'destroy'])->name('types.delete');
+    //Problem type
+    Route::get('/problems', [ProblemController::class, 'index']);
+    Route::get('/problems/create', [ProblemController::class, 'create']);
+    Route::post('/problems/create', [ProblemController::class, 'store']);
+    Route::get('/problems/edit/{id}', [ProblemController::class, 'edit']);
+    Route::put('/problems/edit/{id}', [ProblemController::class, 'update'])->name('problems.update');
+    Route::delete('/problems/delete/{id}', [ProblemController::class, 'destroy'])->name('problems.delete');
+    //Solution
+    Route::get('/solutions', [SolutionController::class, 'index']);
+    Route::get('/solutions/create', [SolutionController::class, 'create']);
+    Route::post('/solutions/create', [SolutionController::class, 'store']);
+    Route::get('/solutions/edit/{id}', [SolutionController::class, 'edit']);
+    Route::put('/solutions/edit/{id}', [SolutionController::class, 'update'])->name('solutions.update');
+    Route::delete('/solutions/delete/{id}', [SolutionController::class, 'destroy'])->name('solutions.delete');
+    //Requests
+    Route::get('/requests', [RequestController::class, 'index']);
 });
 
 // Route::get('/dashboard', function () {
