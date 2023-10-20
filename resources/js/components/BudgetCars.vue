@@ -56,6 +56,63 @@
                 </div>
             </div>
             <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mt-6">
+                <div v-if="loading" class="w-full sm:max-w-[400px] md:max-w-none mx-auto bg-white sm:h-fit lg:h-[200px] rounded-md p-2 lg:flex animate-pulse">
+                    <div class="bg-gray-300 mr-4 sm:w-full lg:w-[200px] h-[200px] lg:h-full rounded-md block"></div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h1 class="font-poppins font-[500] text-[14px] bg-gray-300 text-transparent rounded-md">Loading...</h1>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] sm:mt-1 md:mt-2 bg-gray-300 text-transparent rounded-md">Loading...</p>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] mt-[2px] bg-gray-300 text-transparent rounded-md">Loading...</p>
+                            </div>
+                            <p class="font-poppins h-fit text-[10px] text-[#1d6363] w-fit rounded-md px-[10px] py-[4px] font-[500] bg-gray-300 text-transparent">Loading...</p>
+                        </div>
+                        <button class="text-[white] block rounded-md px-4 py-2 text-[12px] font-poppins font-[600] w-fit lg:mb-4 sm:mt-2 lg:mt-0 bg-gray-300 text-transparent">Loading...</button>
+                    </div>
+                </div>
+                <div v-if="loading" class="w-full sm:max-w-[400px] md:max-w-none mx-auto bg-white sm:h-fit lg:h-[200px] rounded-md p-2 lg:flex animate-pulse">
+                    <div class="bg-gray-300 mr-4 sm:w-full lg:w-[200px] h-[200px] lg:h-full rounded-md block"></div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h1 class="font-poppins font-[500] text-[14px] bg-gray-300 text-transparent rounded-md">Loading...</h1>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] sm:mt-1 md:mt-2 bg-gray-300 text-transparent rounded-md">Loading...</p>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] mt-[2px] bg-gray-300 text-transparent rounded-md">Loading...</p>
+                            </div>
+                            <p class="font-poppins h-fit text-[10px] text-[#1d6363] w-fit rounded-md px-[10px] py-[4px] font-[500] bg-gray-300 text-transparent">Loading...</p>
+                        </div>
+                        <button class="text-[white] block rounded-md px-4 py-2 text-[12px] font-poppins font-[600] w-fit lg:mb-4 sm:mt-2 lg:mt-0 bg-gray-300 text-transparent">Loading...</button>
+                    </div>
+                </div>
+                <div v-if="loading" class="w-full sm:max-w-[400px] md:max-w-none mx-auto bg-white sm:h-fit lg:h-[200px] rounded-md p-2 lg:flex animate-pulse">
+                    <div class="bg-gray-300 mr-4 sm:w-full lg:w-[200px] h-[200px] lg:h-full rounded-md block"></div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h1 class="font-poppins font-[500] text-[14px] bg-gray-300 text-transparent rounded-md">Loading...</h1>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] sm:mt-1 md:mt-2 bg-gray-300 text-transparent rounded-md">Loading...</p>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] mt-[2px] bg-gray-300 text-transparent rounded-md">Loading...</p>
+                            </div>
+                            <p class="font-poppins h-fit text-[10px] text-[#1d6363] w-fit rounded-md px-[10px] py-[4px] font-[500] bg-gray-300 text-transparent">Loading...</p>
+                        </div>
+                        <button class="text-[white] block rounded-md px-4 py-2 text-[12px] font-poppins font-[600] w-fit lg:mb-4 sm:mt-2 lg:mt-0 bg-gray-300 text-transparent">Loading...</button>
+                    </div>
+                </div>
+                <div v-if="loading" class="w-full sm:max-w-[400px] md:max-w-none mx-auto bg-white sm:h-fit lg:h-[200px] rounded-md p-2 lg:flex animate-pulse">
+                    <div class="bg-gray-300 mr-4 sm:w-full lg:w-[200px] h-[200px] lg:h-full rounded-md block"></div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h1 class="font-poppins font-[500] text-[14px] bg-gray-300 text-transparent rounded-md">Loading...</h1>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] sm:mt-1 md:mt-2 bg-gray-300 text-transparent rounded-md">Loading...</p>
+                                <p class="sm:text-[12px] md:text-[13px] font-poppins md:font-[500] mt-[2px] bg-gray-300 text-transparent rounded-md">Loading...</p>
+                            </div>
+                            <p class="font-poppins h-fit text-[10px] text-[#1d6363] w-fit rounded-md px-[10px] py-[4px] font-[500] bg-gray-300 text-transparent">Loading...</p>
+                        </div>
+                        <button class="text-[white] block rounded-md px-4 py-2 text-[12px] font-poppins font-[600] w-fit lg:mb-4 sm:mt-2 lg:mt-0 bg-gray-300 text-transparent">Loading...</button>
+                    </div>
+                </div>
+
                 <CarCard v-for="item in paginatedDisplay" :image="item.image" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
             </div>
             <div class="mt-[60px] mb-[40px]">
@@ -76,6 +133,7 @@ export default{
         return{
             brands: [],
             cars: [],
+            loading: true, 
             prices: [],
             display: [],
             budget: '',
@@ -203,6 +261,7 @@ export default{
         await this.loadBrands()
         await this.loadPrices()
         await this.loadCars()
+        this.loading = false
     },
     components: {
         CarCard

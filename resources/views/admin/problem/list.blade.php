@@ -52,7 +52,7 @@
                     <p class="mb-0 text-xs font-semibold leading-tight">{{ $item->type->name }}</p>
                   </td>
                   <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                    <form action="{{ route('problems.delete', $item->id) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce modèle ?')">
+                    <form action="{{ route('problems.delete', $item->id) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce problème ?')">
                       @csrf
                       @method('DELETE')
                       <a href="/problems/edit/{{$item->id}}" class="text-xs font-semibold leading-tight text-slate-400 mx-2">Modifier</a>

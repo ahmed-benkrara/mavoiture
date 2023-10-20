@@ -41,7 +41,7 @@
                                     </td>
                                     <td class="px-6 py-3 text-xs text-center">
                                         <form action="{{ route('solutions.delete', $item->id) }}" method="post"
-                                            onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce modèle ?')">
+                                            onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette solution ?')">
                                             @csrf
                                             @method('DELETE')
                                             <a href="/solutions/edit/{{ $item->id }}" class="text-xs text-slate-400 mx-2">Modifier</a>

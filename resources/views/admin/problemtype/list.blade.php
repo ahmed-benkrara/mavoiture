@@ -52,7 +52,7 @@
                     <p class="mb-0 text-xs font-semibold leading-tight">{{ $item->created_at->format('Y-m-d') }}</p>
                   </td>
                   <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                    <form action="{{ route('types.delete', $item->id) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette marque ?')">
+                    <form action="{{ route('types.delete', $item->id) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce type ?')">
                       @csrf
                       @method('DELETE')
                       <a href="/types/edit/{{$item->id}}" class="text-xs font-semibold leading-tight text-slate-400 mx-2">Modifier</a>

@@ -4,7 +4,7 @@
         <ul class="text-[#1e1e2f] flex">
             <li><a href="{{ url('/') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Accueil</a></li>
             <li><a href="{{ url('/search') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Trouver Auto</a></li>
-            <li><a href="#" class="listhover cursor-pointer block mr-[40px] opacity-90">Diagnostique</a></li>
+            <li><a href="{{ url('/diagnostics') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Diagnostique</a></li>
             <li><a href="{{ url('/about') }}" class="listhover cursor-pointer block opacity-90">À Propos</a></li>
         </ul>
         <div class="flex items-center ml-[40px]">
@@ -25,7 +25,7 @@
             <ul class="text-black">
                 <a href="{{ url('/') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Accueil</a>
                 <a href="{{ url('/search') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Trouver Auto</a>
-                <a href="#" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Diagnostique</a>
+                <a href="{{ url('/diagnostics') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px] border-b-[1px]">Diagnostique</a>
                 <a href="{{ url('/about') }}" class="cursor-pointer opacity-80 block text-[16px] py-[20px]">À Propos</a>
             </ul>
             <div class="flex w-full sm:text-[14px] md:text-[16px] border-t-[1px] pt-[20px] font-poppins font-[300]">
