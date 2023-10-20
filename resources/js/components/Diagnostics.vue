@@ -30,26 +30,30 @@
 
                 <div class="w-full mt-[40px]">
                     <label for="brand" class="block sm:text-[13px] md:text-[14px] mb-1">Marque</label>
-                    <select id="brand" name="brand" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
-                        <option value="">Sélectionnez la marque</option>
+                    <select id="brand" v-model="brand" name="brand" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                        <option value="" selected disabled>Sélectionnez la marque</option>
+                        <option v-for="item in brands" :value="item.id" :key="item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="w-full mt-4">
                     <label for="model" class="block sm:text-[13px] md:text-[14px] mb-1">Modèle</label>
-                    <select id="model" name="model" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
-                        <option value="">Sélectionnez le modèle</option>
+                    <select id="model" v-model="model" name="model" :disabled="brand == ''" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                        <option value="" selected disabled>Sélectionnez le modèle</option>
+                        <option v-for="item in filteredModels" :value="item.id" :key="item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="w-full mt-4">
                     <label for="motorisation" class="block sm:text-[13px] md:text-[14px] mb-1">Motorisation</label>
-                    <select id="motorisation" name="motorisation" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
-                        <option value="">Sélectionnez la motorisation</option>
+                    <select id="motorisation" v-model="moto" :disabled="model == ''" name="motorisation" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                        <option value="" selected disabled>Sélectionnez la motorisation</option>
+                        <option v-for="item in filterMoto" :value="item.id" :key="item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="w-full mt-4">
                     <label for="generation" class="block sm:text-[13px] md:text-[14px] mb-1">Génération</label>
-                    <select id="generation" name="generation" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
-                        <option value="">Sélectionnez la génération</option>
+                    <select id="generation" v-model="generation" :disabled="model == ''" name="generation" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                        <option value="" selected disabled>Sélectionnez la génération</option>
+                        <option v-for="item in filterGeneration" :value="item.id" :key="item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="w-full mt-[30px]">
@@ -62,14 +66,11 @@
                 <h1 class="text-[18px] font-bold text-center">Choisissez le type de problème</h1>
                 <p class="text-[15px] text-[#b3b1bc] mt-1 text-center">Tous les champs sont requis !</p>
 
-                <div class="w-full mt-[40px]">
+                <!-- <div class="w-full mt-[40px]">
                     <label for="exterieur" class="bg-[#fafafa] radioactive cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Extérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Intérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Moteur</label>
+                </div> -->
+                <div class="w-full mt-4" v-for="item in problemTypes" :key="item.id">
+                    <p @click="checkedType($event)" :typeid="item.id" class="problemtype bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">{{ item.name }}</p>
                 </div>
                 <div class="w-full mt-[30px]">
                     <button @click="next(3)" class="btnhover w-1/2 block bg-black text-white sm:text-[14px] md:text-[14px] sm:px-4 sm:py-[6px] md:px-4 md:py-[9px] text-[14px]">Suivant</button>
@@ -81,26 +82,8 @@
                 <h1 class="text-[18px] font-bold text-center">Où as-tu le problème ?</h1>
                 <p class="text-[15px] text-[#b3b1bc] mt-1 text-center">Détails du problème</p>
 
-                <div class="w-full mt-[40px]">
-                    <label for="exterieur" class="bg-[#fafafa] radioactive cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Extérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Intérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Moteur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Intérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Moteur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Intérieur</label>
-                </div>
-                <div class="w-full mt-4">
-                    <label for="exterieur" class="bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Moteur</label>
+                <div class="w-full mt-4" v-for="item in filterProblems" :key="item.id">
+                    <p @click="checkedProblem($event)" :problem="item.id" class="problem bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">{{ item.name }}</p>
                 </div>
                 <div class="w-full mt-[30px]">
                     <button @click="next(4)" class="btnhover w-1/2 block bg-black text-white sm:text-[14px] md:text-[14px] sm:px-4 sm:py-[6px] md:px-4 md:py-[9px] text-[14px]">Suivant</button>
@@ -112,18 +95,18 @@
                 <h1 class="text-[18px] font-bold text-center">Voici la solution que nous recommandons</h1>
 
                 <p class="w-full mt-[30px] text-[14px]">
-                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
+                    {{ getSolution ? getSolution.description : ''}}
                 </p>
 
                 <p class="text-[15px] text-[red] mt-4">Pour plus de détails, contactez-nous sur WhatsApp.</p>
                 
                 <div class="w-full mt-4">
                     <label for="phone" class="block sm:text-[13px] md:text-[14px] mb-1">Téléphone</label>
-                    <input type="text" id="phone" name="phone" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                    <input v-model="phone" type="text" id="phone" name="phone" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
                 </div>
                 
                 <div class="w-full mt-[30px]">
-                    <button @click="next(1)" class="btnhover w-1/2 block bg-black text-white sm:text-[14px] md:text-[14px] sm:px-4 sm:py-[6px] md:px-4 md:py-[9px] text-[14px]">Envoyer</button>
+                    <button @click="submitData()" class="btnhover w-1/2 block bg-black text-white sm:text-[14px] md:text-[14px] sm:px-4 sm:py-[6px] md:px-4 md:py-[9px] text-[14px]">Envoyer</button>
                 </div>   
             </div>
         </div>
@@ -132,22 +115,206 @@
 
 
 <script>
+import axios from 'axios'
 
 export default{
     name: 'Diagnostics',
     data(){
         return{
-            step : 1
+            step: 1,
+            brands: [],
+            brand: "",
+
+            models: [],
+            model: "",
+
+            motorisations: [],
+            moto: "",
+
+            generations: [],
+            generation: "",
+
+            problemTypes: [],
+            type: 0,
+
+            problems: [],
+            problem : 0,
+
+            solutions: [],
+            solution: '',
+
+            phone: ''
         }
     },
     methods: {
         next(step){
+            if(step == 2 && !this.validateStep1()){
+                return
+            }
+
+            if(step == 3 && this.type == 0){
+                alert(`Le choix d'une catégorie de problème est obligatoire !`)
+                return
+            }
+
+            if(step == 4 && this.problem == 0){
+                alert(`Il est nécessaire de choisir un problème !`)
+                return
+            }
+
             this.step = step
+        },
+        validateStep1(){
+            let br = document.getElementById('brand')
+            let md = document.getElementById('model')
+            let mt = document.getElementById('motorisation')
+            let gn = document.getElementById('generation')
+
+            if(this.brand == ""){
+                br.classList.add('error')
+                return false
+            }else{
+                if(br.classList.contains('error')){
+                    br.classList.remove('error')
+                }
+            }
+
+            if(this.model == ""){
+                md.classList.add('error')
+                return false
+            }else{
+                if(md.classList.contains('error')){
+                    md.classList.remove('error')
+                }
+            }
+
+            if(this.moto == ""){
+                mt.classList.add('error')
+                return false
+            }else{
+                if(mt.classList.contains('error')){
+                    mt.classList.remove('error')
+                }
+            }
+
+            if(this.filterGeneration.length > 0 && this.generation == ""){
+                gn.classList.add('error')
+                return false
+            }else{
+                if(gn.classList.contains('error')){
+                    gn.classList.remove('error')
+                }
+            }
+
+            return true
+        },
+        async loadBrands(){
+            let brands = await axios.get('/api/getbrands')
+            this.brands = brands.data
+        },
+        async loadModels(){
+            let models = await axios.get('/api/getModeles')
+            this.models = models.data
+        },
+        async loadMoto(){
+            let moto = await axios.get('/api/getMotorisations')
+            this.motorisations = moto.data
+        },
+        async loadGenerations(){
+            let generations = await axios.get('/api/getGenerations')
+            this.generations = generations.data
+        },
+        async loadTypes(){
+            let types = await axios.get('/api/getProblemTypes')
+            this.problemTypes = types.data
+        },
+        async loadProblems(){
+            let problems = await axios.get('/api/getProblems')
+            this.problems = problems.data
+            console.log(this.problems)
+        },
+        async loadSolutions(){
+            let solutions = await axios.get('/api/getSolutions')
+            this.solutions = solutions.data
+        },
+        checkedType(e){
+            let items = document.getElementsByClassName('problemtype')
+            items = Array.from(items)
+            items.forEach((item) => {
+                if(item.classList.contains('radioactive')){
+                    item.classList.remove('radioactive')
+                }
+            })
+            e.target.classList.add('radioactive')
+            this.type = e.target.getAttribute('typeid')
+        },
+        checkedProblem(e){
+            let items = document.getElementsByClassName('problem')
+            items = Array.from(items)
+            items.forEach((item) => {
+                if(item.classList.contains('radioactive')){
+                    item.classList.remove('radioactive')
+                }
+            })
+            e.target.classList.add('radioactive')
+            this.problem = e.target.getAttribute('problem')
+        },
+        async submitData(){
+            if(this.phone == ''){
+                alert('Le téléphone est requis !')
+                return
+            }
+
+            let response = await axios.post('/api/sendRequest', {
+                'generation': this.generation == "" ? null : this.generation,
+                'motorisation': this.moto,
+                'phone': this.phone,
+                'problem': this.problem 
+            })
+
+            window.open(response.data, '_blank')
+            console.log(response.data)
+            // alert(this.phone)
         }
+    },
+    computed:{
+        filteredModels(){
+            return this.models.filter(x => x.mark_id == this.brand)
+        },
+        filterMoto(){
+            return this.motorisations.filter(x => x.modele_id == this.model)
+        },
+        filterGeneration(){
+            return this.generations.filter(x => x.modele_id == this.model)
+        },
+        filterProblems(){
+            return this.problems.filter(x => x.type_id == this.type)
+        },
+        getSolution(){
+            return this.solutions.find(x => x.problem_id == this.problem)
+        }
+    },
+    watch:{
+        brand(){
+            this.model = ""
+        },
+        model(){
+            this.moto = ""
+            this.generation = ""
+        }
+    },
+    async mounted(){
+        await this.loadBrands()
+        await this.loadModels()
+        await this.loadMoto()
+        await this.loadGenerations()
+        await this.loadTypes()
+        await this.loadProblems()
+        await this.loadSolutions()
     }
 }
 </script>
-<!-- #1D6363 -->
+
 <style scoped>
     /* .step{
         @apply w-fit text-center mx-10;
@@ -165,6 +332,10 @@ export default{
         background-color: #1D6363 !important;
         color: white !important;
         cursor: pointer;
+    }
+
+    .error{
+        border-color: red;
     }
 
     .radioactive{

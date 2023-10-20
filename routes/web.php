@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::delete('/solutions/delete/{id}', [SolutionController::class, 'destroy'])->name('solutions.delete');
     //Requests
     Route::get('/requests', [RequestController::class, 'index']);
+    Route::get('/requests/export', [RequestController::class, 'downloadExcel']);
 });
 
 // Route::get('/dashboard', function () {

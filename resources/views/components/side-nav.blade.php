@@ -12,11 +12,11 @@
     <div style="overflow-y:auto;" class="after">
         <ul class="flex flex-col pl-0 mb-0">
             <li class="mt-0.5 w-full">
-                <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{ url('/clients') }}">
+                <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{ url('/requests') }}">
                 <div class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current stroke-0 text-center xl:p-2.5">
                     <i class="fa-solid fa-user icnav"></i>
                 </div>
-                <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Clients</span>
+                <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Demandes</span>
                 </a>
             </li>
             <li class="w-full mt-4">
