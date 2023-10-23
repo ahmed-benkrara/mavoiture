@@ -16,15 +16,15 @@
         <div class="h-fit sm:pt-[50px] md:pt-[100px] py-[40px] w-full mx-auto">
             <ul class="flex w-fit mx-auto mb-4">
                 <li class="step selected">1</li>
-                <div class="w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px] selected"></div>
+                <div class="sm:w-[50px] md:w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px] selected"></div>
                 <li class="step" :class="step >= 2 ? 'selected' : ''">2</li>
-                <div class="w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px]" :class="step >= 2 ? 'selected' : ''"></div>
+                <div class="sm:w-[50px] md:w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px]" :class="step >= 2 ? 'selected' : ''"></div>
                 <li class="step" :class="step >= 3 ? 'selected' : ''">3</li>
-                <div class="w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px]" :class="step >= 3 ? 'selected' : ''"></div>
+                <div class="sm:w-[50px] md:w-[80px] h-[6px] bg-[#e5e6e6] mt-[15px]" :class="step >= 3 ? 'selected' : ''"></div>
                 <li class="step" :class="step == 4 ? 'selected' : ''">4</li>
             </ul>
             <!--step1-->
-            <div v-show="step == 1" class="font-poppins w-[55%] mx-auto py-4 mt-[40px]">
+            <div v-show="step == 1" class="font-poppins sm:w-[90%] md:w-[70%] lg:w-[55%] mx-auto py-4 mt-[40px]">
                 <h1 class="text-[18px] font-bold text-center">Choisissez les détails de votre voiture</h1>
                 <p class="text-[15px] text-[#b3b1bc] mt-1 text-center">Tous les champs sont requis !</p>
 
@@ -66,9 +66,6 @@
                 <h1 class="text-[18px] font-bold text-center">Choisissez le type de problème</h1>
                 <p class="text-[15px] text-[#b3b1bc] mt-1 text-center">Tous les champs sont requis !</p>
 
-                <!-- <div class="w-full mt-[40px]">
-                    <label for="exterieur" class="bg-[#fafafa] radioactive cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">Extérieur</label>
-                </div> -->
                 <div class="w-full mt-4" v-for="item in problemTypes" :key="item.id">
                     <p @click="checkedType($event)" :typeid="item.id" class="problemtype bg-[#fafafa] cursor-pointer w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">{{ item.name }}</p>
                 </div>
@@ -103,6 +100,10 @@
                 <div class="w-full mt-4">
                     <label for="phone" class="block sm:text-[13px] md:text-[14px] mb-1">Téléphone</label>
                     <input v-model="phone" type="text" id="phone" name="phone" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                </div>
+                <div class="w-full mt-2">
+                    <label for="fname" class="block sm:text-[13px] md:text-[14px] mb-1">Prénom</label>
+                    <input v-model="fname" type="text" id="fname" name="fname" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
                 </div>
                 
                 <div class="w-full mt-[30px]">
@@ -143,7 +144,8 @@ export default{
             solutions: [],
             solution: '',
 
-            phone: ''
+            phone: '',
+            fname: ''
         }
     },
     methods: {
@@ -265,16 +267,20 @@ export default{
                 return
             }
 
+            if(this.fname == ''){
+                alert('Le prénom est requis !')
+                return
+            }
+
             let response = await axios.post('/api/sendRequest', {
                 'generation': this.generation == "" ? null : this.generation,
                 'motorisation': this.moto,
                 'phone': this.phone,
+                'fname': this.fname,
                 'problem': this.problem 
             })
 
             window.open(response.data, '_blank')
-            console.log(response.data)
-            // alert(this.phone)
         }
     },
     computed:{

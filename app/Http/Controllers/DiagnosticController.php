@@ -51,6 +51,7 @@ class DiagnosticController extends Controller
         $generation = $request->generation;
         $motorisation = $request->motorisation;
         $phone = $request->phone;
+        $fname = $request->fname;
         $problem = $request->problem;
 
         $car = Car::where([['motorisation_id', $motorisation], ['generation_id', $generation]])->first();
@@ -59,6 +60,7 @@ class DiagnosticController extends Controller
             $req = Demande::create([
                 'car_id' => $car->id,
                 'phone' => $phone,
+                'fname' => $fname,
                 'problem_id' => $problem
             ]);
 

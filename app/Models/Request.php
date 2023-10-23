@@ -14,7 +14,7 @@ class Request extends Model
     protected $table = 'request';
     protected $primarykey = 'id';
     protected $fillable = [
-        'phone', 'car_id', 'problem_id'
+        'fname', 'phone', 'car_id', 'problem_id'
     ];
 
     public function car(){

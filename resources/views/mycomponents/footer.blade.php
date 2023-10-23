@@ -16,10 +16,12 @@
         <div class="md:col-span-2 lg:col-span-1">
             <div class="md:w-full lg:w-fit ml-auto">
                 <h1 class="sm:hidden lg:block opacity-90 font-poppins font-[600] text-[17px] text-black">Rejoignez notre communauté</h1>
-                <div class="flex md:w-full lg:w-fit h-fit mt-4">
-                    <input class="input w-full block px-6 py-[16px] outline-none border-[1px]" type="text" placeholder="Entrer votre email">
-                    <button class="block px-4 text-white bg-[#1d6363] font-[500]">GO</button>
-                </div>
+                    <form class="flex md:w-full lg:w-fit h-fit mt-4" action="/newsletter" method="post">
+                        @csrf
+                        <input class="input w-full block px-6 py-[16px] outline-none border-[1px]" type="email" name="email" placeholder="Entrer votre email">
+                        <button class="block px-4 text-white bg-[#1d6363] font-[500]">GO</button>
+                    </form>
+                
             </div>
         </div>
     </div>

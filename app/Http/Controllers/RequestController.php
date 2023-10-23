@@ -16,9 +16,6 @@ class RequestController extends Controller
      */
     public function index(Request $req)
     {
-        // $dmd = Demande::with(['car.motorisation.modele:name', 'car.motorisation.modele.mark:name', 'car.generation:name', 'problem:name'])->get();
-        // dd($dmd);
-        // return Excel::download(new RequestsExport, 'exported-data.xlsx');
         $search = $req->input('phone');
         $query = Demande::orderBy('created_at', 'desc');
         if ($search){

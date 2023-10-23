@@ -17,6 +17,7 @@ class RequestsExport implements FromCollection, WithHeadings
 
         $data = $requests->map(function ($request) {
             return [
+                'Prénom' => (string) $request->fname,
                 'Téléphone' => (string) $request->phone,
                 'Motorisation' => optional($request->car->motorisation)->name,
                 'Generation' => optional($request->car->generation)->name,
@@ -33,6 +34,7 @@ class RequestsExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Prénom',
             'Téléphone',
             'Motorisation',
             'Generation',

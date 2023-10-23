@@ -19,6 +19,7 @@ use App\Http\Controllers\ProblemTypeController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\NewsLetterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,10 @@ Route::get('/search', [SearchBudgetController::class, 'index']);
 Route::get('/diagnostics', function(){
     return view('client.diagnostic');
 });
+Route::post('/newsletter', [NewsLetterController::class, 'store']);
 
 Route::group(['middleware' => ['auth']], function(){
+    Route::get('/newsletter', [NewsLetterController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //clients
     Route::get('/clients', [ClientController::class, 'index']);
