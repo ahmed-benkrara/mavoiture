@@ -43,6 +43,16 @@
                     </select>
                 </div>
                 <div class="w-full mt-4">
+                    <label for="type" class="block sm:text-[13px] md:text-[14px] mb-1">Type de motorisation</label>
+                    <select id="type" v-model="motoType" :disabled="model == ''" name="type" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
+                        <option value="" selected disabled>Sélectionner un type</option>
+                        <option value="essence">Essence</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="electrique">Electrique</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+                </div>
+                <div class="w-full mt-4">
                     <label for="motorisation" class="block sm:text-[13px] md:text-[14px] mb-1">Motorisation</label>
                     <select id="motorisation" v-model="moto" :disabled="model == ''" name="motorisation" class="bg-[#fafafa] w-full block sm:text-[14px] md:text-[14px] sm:px-[12px] sm:py-[6px] md:px-4 md:py-2 outline-none border-[1px]">
                         <option value="" selected disabled>Sélectionnez la motorisation</option>
@@ -131,6 +141,7 @@ export default{
 
             motorisations: [],
             moto: "",
+            motoType: "",
 
             generations: [],
             generation: "",
@@ -288,7 +299,7 @@ export default{
             return this.models.filter(x => x.mark_id == this.brand)
         },
         filterMoto(){
-            return this.motorisations.filter(x => x.modele_id == this.model)
+            return this.motorisations.filter(x => x.modele_id == this.model && x.type == this.motoType)
         },
         filterGeneration(){
             return this.generations.filter(x => x.modele_id == this.model)
@@ -306,6 +317,7 @@ export default{
         },
         model(){
             this.moto = ""
+            this.motoType = ""
             this.generation = ""
         }
     },

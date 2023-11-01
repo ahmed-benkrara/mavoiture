@@ -13,7 +13,7 @@ class Motorisation extends Model
     protected $table = 'motorisation';
     protected $primarykey = 'id';
     protected $fillable = [
-        'name', 'modele_id'
+        'name', 'type', 'modele_id'
     ];
 
     public function modele(){

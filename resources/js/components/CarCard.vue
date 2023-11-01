@@ -6,6 +6,7 @@
                 <div>
                     <h1 class="font-poppins font-[500] text-[14px]">{{ title }}</h1>
                     <p class="text-[#0000008c] sm:text-[12px] md:text-[13px] font-poppins md:font-[500] sm:mt-1 md:mt-2">Motorisation : {{ motorisation }}</p>
+                    <p class="text-[#0000008c] sm:text-[12px] md:text-[13px] font-poppins md:font-[500]">{{ type != null ? 'Type : '+ type : '' }}</p>
                     <p class="text-[#0000008c] sm:text-[12px] md:text-[13px] font-poppins md:font-[500] mt-[2px]">{{ generation != null ? 'Génération : '+ generation : '' }}</p>
                 </div>
                 <p class="font-poppins h-fit text-[10px] text-[#1d6363] bg-[#f0f8ef] w-fit rounded-md px-[10px] py-[4px] font-[500]">Nouveau</p>
@@ -20,7 +21,7 @@
 export default{
     name: 'CarCard',
     props: [
-        'image', 'title', 'motorisation', 'generation', 'price'
+        'image', 'title', 'motorisation', 'generation', 'price', 'type'
     ]
 }
 </script>

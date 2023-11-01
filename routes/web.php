@@ -20,6 +20,7 @@ use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::get('/diagnostics', function(){
     return view('client.diagnostic');
 });
 Route::post('/newsletter', [NewsLetterController::class, 'store']);
+Route::get('/data', [DataController::class, 'uploadForm']);
+Route::post('/data', [DataController::class, 'processExcel'])->name('process.excel');
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/newsletter', [NewsLetterController::class, 'index']);

@@ -113,7 +113,7 @@
                     </div>
                 </div>
 
-                <CarCard v-for="item in paginatedDisplay" :image="item.image" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
+                <CarCard v-for="item in paginatedDisplay" :image="item.image" :type="item.motorisation.type" :title="item.modele.brand.name + ' '+ item.modele.name" :motorisation="item.motorisation.name" :generation="item.generation != null ? item.generation.name : ''" :price="getPrice(item).mint +'-'+ getPrice(item).maxt"/>
             </div>
             <div class="mt-[60px] mb-[40px]">
                 <button class="px-4 py-2 mr-2 rounded-md text-[#1d6363] bg-[#f0f8ef] font-[500] font-poppins text-[12px] border-[1px]" @click="previousPage" :disabled="currentPage === 1">Précédent</button>

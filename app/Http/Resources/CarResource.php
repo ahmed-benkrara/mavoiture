@@ -19,6 +19,7 @@ class CarResource extends JsonResource
             'image' => $this->image,
             'motorisation' => [
                 'id' => $this->motorisation->id ?? null,
+                'type' => $this->motorisation->type ?? null,
                 'name' => $this->motorisation->name ?? null,
             ],
             'generation' => [

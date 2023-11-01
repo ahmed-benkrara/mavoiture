@@ -15,6 +15,8 @@ class MotorisationController extends Controller
         'name.string' => 'Le nom de la motorisation doit être une chaîne.',
         'name.max' => 'Le nom de la motorisation ne doit pas dépasser :max caractères.',
         'modele_id.required' => 'Le champ nom du modèle est obligatoire.',
+        'type.required' => 'Le type de motorisation est requis.',
+        'type.string' => 'Le type de motorisation doit être une chaîne.',
     ];
 
     /**
@@ -49,6 +51,7 @@ class MotorisationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'tyoe' => 'required|string',
             'modele_id' => 'required|integer'
         ],$this->errors);
         //check if exists where(name, modele_id)
@@ -60,6 +63,7 @@ class MotorisationController extends Controller
             //create
             $mot = Motorisation::create([
                 'name' => $request->name,
+                'type' => $request->type,
                 'modele_id' => $request->modele_id
             ]);
 
@@ -105,6 +109,7 @@ class MotorisationController extends Controller
             $found = Motorisation::findOrFail($id);
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
+                'type' => 'required|string',
                 'modele_id' => 'required|integer'
             ],$this->errors);
             //check if exists where(name, modele_id)
@@ -117,6 +122,7 @@ class MotorisationController extends Controller
                 //update
                 $mot = $found->update([
                     'name' => $request->name,
+                    'type' => $request->type,
                     'modele_id' => $request->modele_id
                 ]);
     

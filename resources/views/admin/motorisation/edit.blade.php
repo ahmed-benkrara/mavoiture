@@ -38,6 +38,13 @@
                     @method('PUT')
                     <label class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="name">Nom du motorisation</label>
                     <input type="text" id="name" value="{{ $motorisation->name }}" name="name" placeholder="" class="focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                    <label class="mt-4 inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="type">Type de motorisation</label>
+                    <select id="type" name="type" class="focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                        <option value="essence" selected="{{ $motorisation->type == 'essence' }}">Essence</option>
+                        <option value="diesel" selected="{{ $motorisation->type == 'diesel' }}">Diesel</option>
+                        <option value="electrique" selected="{{ $motorisation->type == 'electrique' }}">Electrique</option>
+                        <option value="hybrid" selected="{{ $motorisation->type == 'hybrid' }}">Hybrid</option>
+                    </select>
                     <label class="mt-4 inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="mark_id">Nom du modèle</label>
                     <select id="modele_id" name="modele_id" class="focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
                         @foreach($modeles as $item)

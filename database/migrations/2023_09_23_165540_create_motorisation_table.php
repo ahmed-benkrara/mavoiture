@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('motorisation', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
             $table->unsignedInteger('modele_id');
             $table->foreign('modele_id')->references('id')->on('modele')->onDelete('cascade');
             $table->timestamps();
