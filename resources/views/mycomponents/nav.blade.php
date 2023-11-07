@@ -1,22 +1,21 @@
-<nav class="w-full bg-[white]">
-    <div id="nav" class="py-6 sm:w-[95%] lg:w-[90%] mx-auto flex items-center justify-between font-poppins text-white">
-        <img class="sm:w-[95px] lg:w-[120px] block mr-[6%] z-[1000]" src="{{ url('/images/logos/logo.png') }}" alt="">
-        {{-- <h1 class="text-[24px] font-[700] cursor-pointer font-poppins text-[black] z-[1100] text-center flex items-baseline mr-[6%]">
-            Inspecto<span class="bg-[#97c680] ml-[4px] w-[6px] h-[6px]"></span>
-        </h1> --}}
-        <ul class="text-[white] sm:hidden lg:flex text-[15px]">
-            <li><a href="{{ url('/') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block mr-[6px]">Accueil</a></li>
-            <li><a href="{{ url('/search') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block mr-[6px]">Trouver Auto</a></li>
-            <li><a href="{{ url('/diagnostics') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block mr-[6px]">Diagnostique</a></li>
-            <li><a href="{{ url('/about') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block mr-[6px]">À Propos</a></li>
-            <li><a href="{{ url('/contact') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block mr-[6px]">Contact</a></li>
-            <li><a href="{{ url('/login') }}" class="bg-[#2196f3] hover:bg-[#2195f3be] rounded-md px-[20px] py-[12px] cursor-pointer block">Se Connecter</a></li>
+<nav id="nav" class="sm:pt-[18px] lg:pt-[25px] sm:pb-[18px] sm:w-[95%] lg:w-[90%] mx-auto flex items-center font-varelarounded">
+    <img class="sm:w-[95px] lg:w-[120px] block mr-[6%] z-[1000]" src="{{ url('/images/logos/logo.png') }}" alt="">
+    <div class="w-full justify-between items-center text-[16px] sm:hidden lg:flex">
+        <ul class="text-[#1e1e2f] flex">
+            <li><a href="{{ url('/') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Accueil</a></li>
+            <li><a href="{{ url('/search') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Trouver Auto</a></li>
+            <li><a href="{{ url('/diagnostics') }}" class="listhover cursor-pointer block mr-[40px] opacity-90">Diagnostique</a></li>
+            <li><a href="{{ url('/about') }}" class="listhover cursor-pointer block opacity-90">À Propos</a></li>
         </ul>
-        <!-- menu button (open/close) -->
-        <div id="menubtn" class="bg-[black] z-[1000] px-[9px] py-[12px] ml-auto cursor-pointer sm:block lg:hidden">
-            <div class="bg-white w-[16px] h-[2px] mb-[4px]"></div>
-            <div class="bg-white w-[16px] h-[2px]"></div>
+        <div class="flex items-center ml-[40px]">
+            <a href="{{ url('/contact') }}" class="listhover cursor-pointer opacity-90 block mr-[25px]">Contact</a>
+            <a href="{{ url('/login') }}" class="btnhover cursor-pointer opacity-90 block bg-[#1e1e2f] text-white px-6 py-2 rounded-[20px]">Se Connecter</a>
         </div>
+    </div>
+    <!-- menu button (open/close) -->
+    <div id="menubtn" class="bg-[#1e1e2f] z-[1000] px-[9px] py-[12px] ml-auto cursor-pointer sm:block lg:hidden">
+        <div class="bg-white w-[16px] h-[2px] mb-[4px]"></div>
+        <div class="bg-white w-[16px] h-[2px]"></div>
     </div>
 </nav>
 <!-- menu body -->

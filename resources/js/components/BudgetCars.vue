@@ -16,7 +16,7 @@
                 <div class="bg-white px-4 py-3 rounded-md shadow-lg">
                     <div class="sm:block md:flex w-full h-fit">
                         <input ref="budget" class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
-                        <select ref="marque" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
+                        <select ref="marque" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2 bg-white">
                             <option selected disabled value="">Marque</option>
                             <option value="all">Tout</option>
                             <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
@@ -32,7 +32,7 @@
                 <div class="bg-white px-4 py-3 rounded-md shadow-lg">
                     <div class="sm:block md:flex w-full h-fit">
                         <input ref="budget1" class="input w-full block px-6 py-[16px] outline-none border-none" type="text" placeholder="Entrez votre budget">
-                        <select ref="marque1" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2">
+                        <select ref="marque1" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2 bg-white">
                             <option selected disabled value="">Marque</option>
                             <option value="all">Tout</option>
                             <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
@@ -48,7 +48,7 @@
                     <p class="font-poppins font-[400] text-[13px] text-[#5f5f5f]">Explorez les voitures !</p>
                 </div>
                 <div>
-                    <select ref="prix" class="select select-bordered w-full max-w-xs" @change="searchRange()">
+                    <select ref="prix" class="select select-bordered w-full max-w-xs bg-white" @change="searchRange()">
                         <option disabled selected value="">Gammes de prix</option>
                         <option value="all">Tous les prix</option>
                         <option v-for="item in prices" :value="item.id">{{ item.min }} - {{ item.max }} Dh</option>
