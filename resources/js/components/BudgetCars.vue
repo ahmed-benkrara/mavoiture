@@ -21,6 +21,14 @@
                             <option value="all">Tout</option>
                             <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
                         </select>
+                        <select ref="carburant" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2 bg-white">
+                            <option selected disabled value="">Carburant</option>
+                            <option value="all">Tout</option>
+                            <option value="essence">Essence</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electrique">Electrique</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
                         <button @click="search()" class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
                         <button @click="search()" class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
                     </div>
@@ -36,6 +44,14 @@
                             <option selected disabled value="">Marque</option>
                             <option value="all">Tout</option>
                             <option v-for="item in brands" :value="item.id">{{ item.name }}</option>
+                        </select>
+                        <select ref="carburant1" class="input w-full block px-6 py-[16px] outline-none border-none md:mr-2 bg-white">
+                            <option selected disabled value="">Carburant</option>
+                            <option value="all">Tout</option>
+                            <option value="essence">Essence</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electrique">Electrique</option>
+                            <option value="hybrid">Hybrid</option>
                         </select>
                         <button @click="search()" class="sm:hidden md:block px-6 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px]">Recherche</button>
                         <button @click="search()" class="sm:block md:hidden px-4 py-2 mt-2 rounded-md text-white bg-[#1d6363] font-[400] font-poppins text-[14px] w-full">Recherche</button>
@@ -192,6 +208,7 @@ export default{
             this.currentPage = 1
             let budget = this.isForm2Hidden ? this.$refs.budget.value : this.$refs.budget1.value
             let marque = this.isForm2Hidden ? this.$refs.marque.value : this.$refs.marque1.value
+            let carburant = this.isForm2Hidden ? this.$refs.carburant.value : this.$refs.carburant1.value
             let prix = this.$refs.prix
             if(budget != ''){
                 prix.value = 'all'
@@ -221,6 +238,9 @@ export default{
                 }else{
                     this.display = this.cars
                 }
+            }
+            if(carburant != 'all'){
+                this.display = this.display.filter(item => item.motorisation.type.includes(carburant))
             }
         },
         searchRange(){
@@ -262,6 +282,7 @@ export default{
         await this.loadPrices()
         await this.loadCars()
         this.loading = false
+        console.log(this.cars)
     },
     components: {
         CarCard

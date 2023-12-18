@@ -18,8 +18,9 @@ class DataController extends Controller
         return view('data');
     }
 
-    public function processExcel(Request $request)
+    public function processExcel(Request $request)  
     {
+
         $request->validate([
             'excel_file' => 'required|mimes:xlsx,xls',
         ]);
@@ -28,147 +29,160 @@ class DataController extends Controller
         $spreadsheet = IOFactory::load($file->getRealPath());
         $worksheet = $spreadsheet->getActiveSheet();
         $data = $worksheet->toArray();
+
         for ($i = 1; $i < count($data); $i++) {
+            
             $row = $data[$i];
             
-            // Extract data from the row
-            $brandName = $row[0];
-            $modeleName = $row[1];
-            $generationName = $row[2] ?: null;
-            $essenceMotorisations = explode(' - ', $row[3]);
-            $dieselMotorisations = explode(' - ', $row[4]);
-            $electriqueMotorisations = explode(' - ', $row[5]);
-            $hybridMotorisations = explode(' - ', $row[6]);
-            list($minPrice, $maxPrice) = explode('-', $row[7]);
+            if(!isset($row)){
+                continue;
+            }
+                
+            $brandName = isset($row[0]) ? $row[0] : null;
+            $modeleName = isset($row[1]) ? $row[1] : null;
+            $generationName = isset($row[2]) ? $row[2] : null;
+            $essencePriceRange = isset($row[3]) ? $row[3] : null;
+            $dieselPriceRange = isset($row[4]) ? $row[4] : null;
+            $electriquePriceRange = isset($row[5]) ? $row[5] : null;
+            $hybridPriceRange = isset($row[6]) ? $row[6] : null;
+            $essenceMotorisations = isset($row[7]) ? explode(' - ', $row[7]) : [];
+            $dieselMotorisations = isset($row[8]) ? explode(' - ', $row[8]) : [];
+            $electriqueMotorisations = isset($row[9]) ? explode(' - ', $row[9]) : [];
+            $hybridMotorisations = isset($row[10]) ? explode(' - ', $row[10]) : [];
             $imageLink = '/images/cars/1696889559.jpg';
 
-            // Create or retrieve Brand, Modele, and Generation
+            if(!$brandName){
+                continue;
+            }
+                
             $brand = Mark::firstOrCreate(['name' => $brandName]);
             $modele = Modele::firstOrCreate(['name' => $modeleName, 'mark_id' => $brand->id]);
             $generation = $generationName ? Generation::firstOrCreate(['name' => $generationName, 'modele_id' => $modele->id]) : null;
-            
-            $mi = $minPrice;
-            $mx = 0;
-            $pcs = [];
-            $x = (($maxPrice - $minPrice) / 10000);
-            for($j = 0; $j<$x; $j++){
-                $mx = $mi + 10000;
-                array_push($pcs, ['min' => $mi, 'max' => $mx]);
-                $mi = $mx;
-            }
-            
-            // Process essence motorisations
-            foreach ($essenceMotorisations as $key => $motorisationName) {
+
+            foreach ($essenceMotorisations as $motorisationName) {
+                
+                if(empty($essencePriceRange)){
+                    continue;
+                }
+
                 $motorisation = Motorisation::updateOrCreate([
                     'type' => 'essence',
-                    'name' => $motorisationName,
+                    'name' => $motorisationName,    
                     'modele_id' => $modele->id,
                 ]);
 
+                $priceRange = $this->getPriceRange($essencePriceRange);
+                
                 $car = new Car();
-                $car->image = $imageLink;
                 $car->motorisation_id = $motorisation->id;
                 $car->generation_id = $generation ? $generation->id : null;
+                $car->image = $imageLink;   
                 $car->save();
                 
-                foreach($pcs as $item){
-                    // Convert the price range to "1M-2M" format
-                    $minPriceM = floor($item['min'] / 10000) . 'M';
-                    $maxPriceM = floor($item['max'] / 10000) . 'M';
-                    $priceRange = PriceRange::updateOrCreate([
-                        'name' => "$minPriceM-$maxPriceM",
-                        'min' => $item['min'],
-                        'max' => $item['max'],
-                    ]);
-                    $car->priceranges()->attach($priceRange);
-                }
+                $car->priceranges()->attach($priceRange);
+                
             }
             
-            // Process diesel motorisations
             foreach ($dieselMotorisations as $motorisationName) {
+
+                if(empty($dieselPriceRange)){
+                    continue;
+                }
+                
                 $motorisation = Motorisation::updateOrCreate([
                     'type' => 'diesel',
                     'name' => $motorisationName,
-                    'modele_id' => $modele->id,
+                    'modele_id' => $modele->id,  
                 ]);
 
+                $priceRange = $this->getPriceRange($dieselPriceRange);
+                
                 $car = new Car();
-                $car->image = $imageLink;
                 $car->motorisation_id = $motorisation->id;
                 $car->generation_id = $generation ? $generation->id : null;
+                $car->image = $imageLink;
                 $car->save();
+                
+                $car->priceranges()->attach($priceRange);
 
-
-                foreach($pcs as $item){
-                    // Convert the price range to "1M-2M" format
-                    $minPriceM = floor($item['min'] / 10000) . 'M';
-                    $maxPriceM = floor($item['max'] / 10000) . 'M';
-                    $priceRange = PriceRange::updateOrCreate([
-                        'name' => "$minPriceM-$maxPriceM",
-                        'min' => $item['min'],
-                        'max' => $item['max'],
-                    ]);
-                    $car->priceranges()->attach($priceRange);
-                }
             }
-            
-            // Process electrique motorisations
+
             foreach ($electriqueMotorisations as $motorisationName) {
+
+                if(empty($electriquePriceRange)){
+                    continue;
+                }
+                
                 $motorisation = Motorisation::updateOrCreate([
                     'type' => 'electrique',
-                    'name' => $motorisationName,
+                    'name' => $motorisationName,   
                     'modele_id' => $modele->id,
                 ]);
 
+                $priceRange = $this->getPriceRange($electriquePriceRange);
+                
                 $car = new Car();
-                $car->image = $imageLink;
                 $car->motorisation_id = $motorisation->id;
                 $car->generation_id = $generation ? $generation->id : null;
+                $car->image = $imageLink;
                 $car->save();
+                
+                $car->priceranges()->attach($priceRange);
 
-
-                foreach($pcs as $item){
-                    // Convert the price range to "1M-2M" format
-                    $minPriceM = floor($item['min'] / 10000) . 'M';
-                    $maxPriceM = floor($item['max'] / 10000) . 'M';
-                    $priceRange = PriceRange::updateOrCreate([
-                        'name' => "$minPriceM-$maxPriceM",
-                        'min' => $item['min'],
-                        'max' => $item['max'],
-                    ]);
-                    $car->priceranges()->attach($priceRange);
-                }
             }
             
-            // Process hybrid motorisations
             foreach ($hybridMotorisations as $motorisationName) {
+
+                if(empty($hybridPriceRange)){
+                    continue;
+                }
+                
                 $motorisation = Motorisation::updateOrCreate([
                     'type' => 'hybrid',
                     'name' => $motorisationName,
-                    'modele_id' => $modele->id,
+                    'modele_id' => $modele->id,   
                 ]);
 
+                $priceRange = $this->getPriceRange($hybridPriceRange);
+                
                 $car = new Car();
-                $car->image = $imageLink;
                 $car->motorisation_id = $motorisation->id;
                 $car->generation_id = $generation ? $generation->id : null;
+                $car->image = $imageLink;
                 $car->save();
+                
+                $car->priceranges()->attach($priceRange);
 
-
-                foreach($pcs as $item){
-                    // Convert the price range to "1M-2M" format
-                    $minPriceM = floor($item['min'] / 10000) . 'M';
-                    $maxPriceM = floor($item['max'] / 10000) . 'M';
-                    $priceRange = PriceRange::updateOrCreate([
-                        'name' => "$minPriceM-$maxPriceM",
-                        'min' => $item['min'],
-                        'max' => $item['max'],
-                    ]);
-                    $car->priceranges()->attach($priceRange);
-                }
             }
+
         }
 
-        return 'File processed, and data inserted into the database.';
+        return 'Processed';
+    }
+
+    public function getPriceRange($priceRangeStr)
+    {
+
+        if ($priceRangeStr) {
+
+            list($min, $max) = explode('-', $priceRangeStr);
+
+            $minPriceM = floor($min / 10000) . 'M';
+            $maxPriceM = floor($max / 10000) . 'M';
+            $name = "$minPriceM-$maxPriceM";
+
+            $existing = PriceRange::where('name', $name)->first();
+            if ($existing) {
+            return $existing;
+            }
+
+            $priceRange = new PriceRange();
+            $priceRange->name = $name;
+            $priceRange->min = $min;
+            $priceRange->max = $max;
+            $priceRange->save();
+
+            return $priceRange;
+        }
     }
 }
